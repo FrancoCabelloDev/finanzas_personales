@@ -1,15 +1,39 @@
-<h1>Ingresos</h1>
-<table>
-    <tr>
-        <th>Descripción</th>
-        <th>Monto</th>
-        <th>Fecha</th>
-    </tr>
-    {% for ingreso in ingresos %}
-    <tr>
-        <td>{{ ingreso.descripcion }}</td>
-        <td>{{ ingreso.monto }}</td>
-        <td>{{ ingreso.fecha }}</td>
-    </tr>
-    {% endfor %}
-</table>
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Ingresos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Lista de Ingresos</h1>
+        <a href="{% url 'crear_ingreso' %}" class="bg-blue-500 text-white px-4 py-2 rounded-md">Nuevo Ingreso</a>
+        <table class="mt-4 w-full bg-white shadow-md rounded-md">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 text-left">Descripción</th>
+                    <th class="px-4 py-2 text-left">Monto</th>
+                    <th class="px-4 py-2 text-left">Fecha</th>
+                    <th class="px-4 py-2 text-left">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ingreso in ingresos %}
+                <tr>
+                    <td class="px-4 py-2">{{ ingreso.descripcion }}</td>
+                    <td class="px-4 py-2">{{ ingreso.monto }}</td>
+                    <td class="px-4 py-2">{{ ingreso.fecha }}</td>
+                    <td class="px-4 py-2">
+                        <a href="{% url 'editar_ingreso' ingreso.pk %}" class="bg-yellow-500 text-white px-2 py-1 rounded-md">Editar</a>
+                        <a href="{% url 'eliminar_ingreso' ingreso.pk %}" class="bg-red-500 text-white px-2 py-1 rounded-md">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
